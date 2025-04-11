@@ -8,30 +8,72 @@ import com.nazax.sistema_consultorio.model.Paciente;
 import com.nazax.sistema_consultorio.repository.ConsultaRepository;
 import com.nazax.sistema_consultorio.repository.MedicoRepository;
 import com.nazax.sistema_consultorio.repository.PacienteRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ConsultaService {
 
-    private final ConsultaRepository consultaRepo;
-    private final MedicoRepository medicoRepo;
-    private final PacienteRepository pacienteRepo;
+    private final ConsultaRepository consultaRepository;
+    private final PacienteRepository pacienteRepository;
+    private final MedicoRepository medicoRepository;
 
-    public List<ConsultaResponseDTO> listarTodos() {
-        return consultaRepo.findAll().stream().map(c -> new ConsultaResponseDTO(
-                c.getId(), c.getPaciente().getNome(), c.getMedico().getNome(), c.getDataHora(), c.getObservacoes()
-        )).collect(Collectors.toList());
+    public ConsultaResponseDTO criar(ConsultaRequestDTO dto) {
+        Consulta consulta = toEntity(dto);
+        consultaRepository.save(consulta);
+        return ConsultaResponseDTO.fromEntity(consulta);
     }
 
-    public void salvar(ConsultaRequestDTO dto) {
-        Paciente paciente = pacienteRepo.findById(dto.getPacienteId()).orElseThrow();
-        Medico medico = medicoRepo.findById(dto.getMedicoId()).orElseThrow();
-        Consulta consulta = new Consulta(null, paciente, medico, dto.getDataHora(), dto.getObservacoes());
-        consultaRepo.save(consulta);
+    public List<ConsultaResponseDTO> listarTodos() {
+        return consultaRepository.findAll().stream()
+                .map(ConsultaResponseDTO::fromEntity)
+                .toList();
+    }
+
+    public ConsultaResponseDTO buscarPorId(Long id) {
+        Consulta consulta = consultaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Consulta não encontrada"));
+        return ConsultaResponseDTO.fromEntity(consulta);
+    }
+
+    public ConsultaResponseDTO atualizar(Long id, ConsultaRequestDTO dto) {
+        Consulta consulta = consultaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Consulta não encontrada"));
+
+        Paciente paciente = pacienteRepository.findById(dto.getPacienteId())
+                .orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
+
+        Medico medico = medicoRepository.findById(dto.getMedicoId())
+                .orElseThrow(() -> new EntityNotFoundException("Médico não encontrado"));
+
+        consulta.setPaciente(paciente);
+        consulta.setMedico(medico);
+        consulta.setDataHora(dto.getDataHora());
+
+        consultaRepository.save(consulta);
+        return ConsultaResponseDTO.fromEntity(consulta);
+    }
+
+    public void deletar(Long id) {
+        consultaRepository.deleteById(id);
+    }
+
+    private Consulta toEntity(ConsultaRequestDTO dto) {
+        Paciente paciente = pacienteRepository.findById(dto.getPacienteId())
+                .orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
+
+        Medico medico = medicoRepository.findById(dto.getMedicoId())
+                .orElseThrow(() -> new EntityNotFoundException("Médico não encontrado"));
+
+        Consulta consulta = new Consulta();
+        consulta.setPaciente(paciente);
+        consulta.setMedico(medico);
+        consulta.setDataHora(dto.getDataHora());
+
+        return consulta;
     }
 }

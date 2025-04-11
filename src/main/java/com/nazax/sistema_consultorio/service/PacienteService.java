@@ -6,28 +6,71 @@ import com.nazax.sistema_consultorio.model.Convenio;
 import com.nazax.sistema_consultorio.model.Paciente;
 import com.nazax.sistema_consultorio.repository.ConvenioRepository;
 import com.nazax.sistema_consultorio.repository.PacienteRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PacienteService {
 
-    private final PacienteRepository pacienteRepo;
-    private final ConvenioRepository convenioRepo;
+    private final PacienteRepository pacienteRepository;
+    private final ConvenioRepository convenioRepository;
 
-    public List<PacienteResponseDTO> listarTodos() {
-        return pacienteRepo.findAll().stream().map(p -> new PacienteResponseDTO(
-                p.getId(), p.getNome(), p.getCpf(), p.getTelefone(), p.getConvenio().getNome()
-        )).collect(Collectors.toList());
+    public PacienteResponseDTO criar(PacienteRequestDTO dto) {
+        Paciente paciente = toEntity(dto);
+        pacienteRepository.save(paciente);
+        return PacienteResponseDTO.fromEntity(paciente);
     }
 
-    public void salvar(PacienteRequestDTO dto) {
-        Convenio convenio = convenioRepo.findById(dto.getConvenioId()).orElseThrow();
-        Paciente paciente = new Paciente(null, dto.getNome(), dto.getCpf(), dto.getTelefone(), convenio);
-        pacienteRepo.save(paciente);
+    public List<PacienteResponseDTO> listarTodos() {
+        return pacienteRepository.findAll().stream()
+                .map(PacienteResponseDTO::fromEntity)
+                .toList();
+    }
+
+    public PacienteResponseDTO buscarPorId(Long id) {
+        Paciente paciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
+        return PacienteResponseDTO.fromEntity(paciente);
+    }
+
+    public PacienteResponseDTO atualizar(Long id, PacienteRequestDTO dto) {
+        Paciente paciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
+
+        paciente.setNome(dto.getNome());
+        paciente.setCpf(dto.getCpf());
+        paciente.setTelefone(dto.getTelefone());
+
+        if (dto.getConvenioId() != null) {
+            Convenio convenio = convenioRepository.findById(dto.getConvenioId())
+                    .orElseThrow(() -> new EntityNotFoundException("Convênio não encontrado"));
+            paciente.setConvenio(convenio);
+        }
+
+        pacienteRepository.save(paciente);
+        return PacienteResponseDTO.fromEntity(paciente);
+    }
+
+    public void deletar(Long id) {
+        pacienteRepository.deleteById(id);
+    }
+
+    private Paciente toEntity(PacienteRequestDTO dto) {
+        Paciente paciente = new Paciente();
+        paciente.setNome(dto.getNome());
+        paciente.setCpf(dto.getCpf());
+        paciente.setTelefone(dto.getTelefone());
+
+        if (dto.getConvenioId() != null) {
+            Convenio convenio = convenioRepository.findById(dto.getConvenioId())
+                    .orElseThrow(() -> new EntityNotFoundException("Convênio não encontrado"));
+            paciente.setConvenio(convenio);
+        }
+
+        return paciente;
     }
 }

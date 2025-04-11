@@ -2,12 +2,9 @@ package com.nazax.sistema_consultorio.model;
 
 import com.nazax.sistema_consultorio.enums.Especialidade;
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "medico")
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,4 +15,47 @@ public class Medico {
 
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
+
+    public Medico(){
+
+    }
+
+    public Medico(Long id, String nome, String crm, Especialidade especialidade) {
+        this.id = id;
+        this.nome = nome;
+        this.crm = crm;
+        this.especialidade = especialidade;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
+    public Especialidade getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
+    }
 }

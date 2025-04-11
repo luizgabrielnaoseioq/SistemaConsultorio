@@ -60,8 +60,8 @@ public class Consulta {
         this.medico = medico;
     }
 
-    public LocalDateTime getDataHora() {
-        return dataHora;
+    public LocalDateTime getDataHora(LocalDateTime dataHora) {
+        return this.dataHora;
     }
 
     public void setDataHora(LocalDateTime dataHora) {
@@ -75,5 +75,7 @@ public class Consulta {
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
+
+
 }
 

@@ -1,16 +1,20 @@
 package com.nazax.sistema_consultorio.dto.medico;
 
 import com.nazax.sistema_consultorio.enums.Especialidade;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class MedicoRequestDTO {
+    @NotBlank
     private String nome;
+
+    @NotBlank
     private String crm;
+
+    @NotNull
     private Especialidade especialidade;
 }
+
 
