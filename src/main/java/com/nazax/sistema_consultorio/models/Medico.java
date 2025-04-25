@@ -1,4 +1,4 @@
-package com.nazax.sistema_consultorio.model;
+package com.nazax.sistema_consultorio.models;
 
 import com.nazax.sistema_consultorio.enums.Especialidade;
 import jakarta.persistence.*;

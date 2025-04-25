@@ -1,6 +1,6 @@
-package com.nazax.sistema_consultorio.dto.paciente;
+package com.nazax.sistema_consultorio.dtos.paciente;
 
-import com.nazax.sistema_consultorio.model.Paciente;
+import com.nazax.sistema_consultorio.models.Paciente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -1,8 +1,8 @@
-package com.nazax.sistema_consultorio.controller;
+package com.nazax.sistema_consultorio.controllers;
 
-import com.nazax.sistema_consultorio.dto.medico.MedicoRequestDTO;
-import com.nazax.sistema_consultorio.dto.medico.MedicoResponseDTO;
-import com.nazax.sistema_consultorio.service.MedicoService;
+import com.nazax.sistema_consultorio.dtos.medico.MedicoRequestDTO;
+import com.nazax.sistema_consultorio.dtos.medico.MedicoResponseDTO;
+import com.nazax.sistema_consultorio.services.Medico.MedicoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

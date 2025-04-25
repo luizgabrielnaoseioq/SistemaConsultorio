@@ -1,11 +1,11 @@
-package com.nazax.sistema_consultorio.service;
+package com.nazax.sistema_consultorio.services.PacienteService;
 
-import com.nazax.sistema_consultorio.dto.paciente.PacienteRequestDTO;
-import com.nazax.sistema_consultorio.dto.paciente.PacienteResponseDTO;
-import com.nazax.sistema_consultorio.model.Convenio;
-import com.nazax.sistema_consultorio.model.Paciente;
-import com.nazax.sistema_consultorio.repository.ConvenioRepository;
-import com.nazax.sistema_consultorio.repository.PacienteRepository;
+import com.nazax.sistema_consultorio.dtos.paciente.PacienteRequestDTO;
+import com.nazax.sistema_consultorio.dtos.paciente.PacienteResponseDTO;
+import com.nazax.sistema_consultorio.models.Convenio;
+import com.nazax.sistema_consultorio.models.Paciente;
+import com.nazax.sistema_consultorio.repositories.ConvenioRepository;
+import com.nazax.sistema_consultorio.repositories.PacienteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

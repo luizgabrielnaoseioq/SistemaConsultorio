@@ -1,8 +1,8 @@
-package com.nazax.sistema_consultorio.controller;
+package com.nazax.sistema_consultorio.controllers;
 
-import com.nazax.sistema_consultorio.dto.paciente.PacienteRequestDTO;
-import com.nazax.sistema_consultorio.dto.paciente.PacienteResponseDTO;
-import com.nazax.sistema_consultorio.service.PacienteService;
+import com.nazax.sistema_consultorio.dtos.paciente.PacienteRequestDTO;
+import com.nazax.sistema_consultorio.dtos.paciente.PacienteResponseDTO;
+import com.nazax.sistema_consultorio.services.PacienteService.PacienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

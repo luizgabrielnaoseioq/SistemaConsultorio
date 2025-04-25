@@ -1,6 +1,6 @@
-package com.nazax.sistema_consultorio.dto.medico;
+package com.nazax.sistema_consultorio.dtos.medico;
 
-import com.nazax.sistema_consultorio.model.Medico;
+import com.nazax.sistema_consultorio.models.Medico;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

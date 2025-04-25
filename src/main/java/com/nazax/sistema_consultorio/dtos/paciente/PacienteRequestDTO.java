@@ -1,4 +1,4 @@
-package com.nazax.sistema_consultorio.dto.paciente;
+package com.nazax.sistema_consultorio.dtos.paciente;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.nazax.sistema_consultorio.dto.consulta;
+package com.nazax.sistema_consultorio.dtos.consulta;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -15,4 +15,6 @@ public class ConsultaRequestDTO {
 
     @NotNull
     private LocalDateTime dataHora;
+
+    private String observacoes;
 }
