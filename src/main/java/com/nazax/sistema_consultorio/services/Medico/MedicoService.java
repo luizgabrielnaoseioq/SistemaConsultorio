@@ -1,9 +1,9 @@
-package com.nazax.sistema_consultorio.service;
+package com.nazax.sistema_consultorio.services.Medico;
 
-import com.nazax.sistema_consultorio.dto.medico.MedicoRequestDTO;
-import com.nazax.sistema_consultorio.dto.medico.MedicoResponseDTO;
-import com.nazax.sistema_consultorio.model.Medico;
-import com.nazax.sistema_consultorio.repository.MedicoRepository;
+import com.nazax.sistema_consultorio.dtos.medico.MedicoRequestDTO;
+import com.nazax.sistema_consultorio.dtos.medico.MedicoResponseDTO;
+import com.nazax.sistema_consultorio.models.Medico;
+import com.nazax.sistema_consultorio.repositories.MedicoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
-package com.nazax.sistema_consultorio.controller;
+package com.nazax.sistema_consultorio.controllers;
 
-import com.nazax.sistema_consultorio.dto.consulta.ConsultaRequestDTO;
-import com.nazax.sistema_consultorio.dto.consulta.ConsultaResponseDTO;
-import com.nazax.sistema_consultorio.service.ConsultaService;
+import com.nazax.sistema_consultorio.dtos.consulta.ConsultaRequestDTO;
+import com.nazax.sistema_consultorio.dtos.consulta.ConsultaResponseDTO;
+import com.nazax.sistema_consultorio.services.Consulta.ConsultaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,26 +18,26 @@ public class ConsultaController {
 
     @PostMapping
     public ConsultaResponseDTO criar(@RequestBody @Valid ConsultaRequestDTO dto) {
-        return consultaService.criar(dto);
+        return consultaService.save(dto);
     }
 
     @GetMapping
     public List<ConsultaResponseDTO> listarTodos() {
-        return consultaService.listarTodos();
+        return consultaService.findAll();
     }
 
     @GetMapping("/{id}")
     public ConsultaResponseDTO buscarPorId(@PathVariable Long id) {
-        return consultaService.buscarPorId(id);
+        return consultaService.findById(id);
     }
 
     @PutMapping("/{id}")
     public ConsultaResponseDTO atualizar(@PathVariable Long id, @RequestBody @Valid ConsultaRequestDTO dto) {
-        return consultaService.atualizar(id, dto);
+        return consultaService.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
-        consultaService.deletar(id);
+        consultaService.delete(id);
     }
 }
