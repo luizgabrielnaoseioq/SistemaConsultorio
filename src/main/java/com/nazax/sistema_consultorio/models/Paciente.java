@@ -1,23 +1,28 @@
 package com.nazax.sistema_consultorio.models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
-@Entity
+import java.time.LocalDate;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "pacientes")
 public class Paciente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false, unique = true)
     private String cpf;
-    private String telefone;
 
-    @ManyToOne
-    private Convenio convenio;
+    @Column(name = "data_nascimento", nullable = false)
+    private LocalDate dataNascimento;
+
+    @Column(name = "convenio_id")
+    private Long convenioId;
 }
-
