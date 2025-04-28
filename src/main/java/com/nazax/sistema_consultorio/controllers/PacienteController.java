@@ -5,16 +5,17 @@ import com.nazax.sistema_consultorio.dtos.paciente.PacienteResponseDTO;
 import com.nazax.sistema_consultorio.services.PacienteService.PacienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")
-@RequiredArgsConstructor
 public class PacienteController {
 
-    private final PacienteService pacienteService;
+    @Autowired
+    private PacienteService pacienteService;
 
     @PostMapping
     public PacienteResponseDTO criar(@RequestBody @Valid PacienteRequestDTO dto) {

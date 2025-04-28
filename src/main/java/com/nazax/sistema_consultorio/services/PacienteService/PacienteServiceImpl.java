@@ -7,16 +7,19 @@ import com.nazax.sistema_consultorio.repositories.PacienteRepository;
 import com.nazax.sistema_consultorio.services.PacienteService.Mappers.PacienteMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PacienteServiceImpl implements PacienteService {
 
-    private final PacienteRepository pacienteRepository;
-    private final PacienteMapper pacienteMapper;
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private PacienteMapper pacienteMapper;
 
     @Override
     public PacienteResponseDTO criar(PacienteRequestDTO dto) {
