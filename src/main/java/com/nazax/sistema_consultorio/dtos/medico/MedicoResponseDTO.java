@@ -1,5 +1,6 @@
 package com.nazax.sistema_consultorio.dtos.medico;
 
+import com.nazax.sistema_consultorio.enums.Especialidade;
 import com.nazax.sistema_consultorio.models.Medico;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,10 @@ public class MedicoResponseDTO {
     private String crm;
     private String especialidade;
 
+    public MedicoResponseDTO() {
+
+    }
+
     public static MedicoResponseDTO fromEntity(Medico medico) {
         return new MedicoResponseDTO(
                 medico.getId(),
@@ -19,6 +24,9 @@ public class MedicoResponseDTO {
                 medico.getCrm(),
                 medico.getEspecialidade().name()
         );
+    }
+
+    public void setEspecialidade(Especialidade especialidade) {
     }
 }
 

@@ -4,17 +4,17 @@ import com.nazax.sistema_consultorio.dtos.medico.MedicoRequestDTO;
 import com.nazax.sistema_consultorio.dtos.medico.MedicoResponseDTO;
 import com.nazax.sistema_consultorio.services.Medico.MedicoService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
-@RequiredArgsConstructor
 public class MedicoController {
 
-    private final MedicoService medicoService;
+    @Autowired
+    private MedicoService medicoService;
 
     @PostMapping
     public MedicoResponseDTO criar(@RequestBody @Valid MedicoRequestDTO dto) {
