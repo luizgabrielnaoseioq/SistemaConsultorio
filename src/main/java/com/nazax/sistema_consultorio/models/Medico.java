@@ -5,12 +5,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "medico")
-public class Medico {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Medico extends Usuario{
 
-    private String nome;
     private String crm;
 
     @Enumerated(EnumType.STRING)
