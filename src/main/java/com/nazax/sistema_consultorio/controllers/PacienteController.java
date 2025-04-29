@@ -4,7 +4,6 @@ import com.nazax.sistema_consultorio.dtos.paciente.PacienteRequestDTO;
 import com.nazax.sistema_consultorio.dtos.paciente.PacienteResponseDTO;
 import com.nazax.sistema_consultorio.services.PacienteService.PacienteService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
